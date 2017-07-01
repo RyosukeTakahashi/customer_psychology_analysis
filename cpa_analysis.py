@@ -49,8 +49,11 @@ def main():
     ]
 
     big5 = data[['E', 'A', 'C', 'N', 'O']]
-    # big5 = sm.add_constant(big5)  # これの有無は平均の有り無しに影響
+    big5 = sm.add_constant(big5)  # これの有無は平均の有り無しに影響
+    print("コンスタントあり")
+    # print("コンスタントなし")
 
+    print("以下は、\n説明変数：Big5\n非説明変数：各SNSの選好。モデル3つ。")
     for modelname in modelnames:
 
         model = sm.OLS(data[modelname[:7]], big5)
@@ -60,14 +63,14 @@ def main():
         print('R2: {0:.3f}'.format(results.rsquared))
         print('\n--------------------\n')
 
+
+
+    print("以下は、\n説明変数：Big5\n非説明変数：各SNSの機能。モデル21。")
     sns_characteristics = ["おしゃれさ", "手軽さ", "開放性", "リアルタイム性", "閉鎖性", "匿名性", "バーチャル性"]
 
     df_ave = data[['Y1_fb', 'Y2_fb', 'Y3_fb', 'Y4_fb', 'Y5_fb', 'Y6_fb', 'Y7_fb',
                 'Y1_tw', 'Y2_tw', 'Y3_tw', 'Y4_tw', 'Y5_tw', 'Y6_tw', 'Y7_tw',
                 'Y1_in', 'Y2_in', 'Y3_in', 'Y4_in', 'Y5_in', 'Y6_in', 'Y7_in']].mean()
-
-
-
 
     for sns in ['fb', 'tw', 'in']:
 
